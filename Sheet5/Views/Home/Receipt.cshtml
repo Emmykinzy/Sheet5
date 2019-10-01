@@ -1,0 +1,36 @@
+﻿
+@using Sheet5.Models
+@model Order
+@{
+    ViewBag.Title = "Receipt";
+    DateTime today = DateTime.Today;
+    string t = today.ToString("dddd, dd MMMM yyyy");
+    Order o1 = TempData["Order"] as Order;
+    string tax = String.Format("{0, 0:C2}", o1.Tax);
+    string td = String.Format("{0, 0:C2}", o1.TotalDue);
+    string tc = String.Format("{0, 0:C2}", o1.TotalCost);
+    string sp = String.Format("{0, 0:C2}", o1.SubPrice);
+    string mp = String.Format("{0, 0:C2}", o1.MealPrice);
+
+}
+
+<h2>StarSubs Receipt</h2>
+<br />
+<h4>Today's Date: @t</h4>
+<br />
+<table style="width:300px">
+    <tr><th>Type of Sub:</th><td>@o1.Type</td></tr>
+    <tr><th>Size of Sub:</th><td>@o1.Size</td></tr>
+    <tr><th>Type of Meal Deal:</th><td>@o1.MealDeal</td></tr>
+    <tr><th>Total Price of Sub:</th><td>@sp</td></tr>
+    <tr><th>Price of Meal Deal:</th><td>@mp</td></tr>
+    <tr style="height:30px;"></tr>
+    <tr><th>Amount Ordered:</th><td>@o1.Amount</td></tr>
+    <tr><th>Cost:</th><td>@tc</td></tr>
+    <tr><th>Tax:</th><td>@tax</td></tr>
+    <tr><th>Total Due:</th><td>@td</td></tr>
+</table>
+<br />
+<br />
+<br />
+@Html.ActionLink("New Order", "Index", "Home")

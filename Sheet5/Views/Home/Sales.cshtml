@@ -1,0 +1,60 @@
+﻿@using Sheet5.Models
+@model Order
+@{
+    ViewBag.Title = "Sales";
+
+}
+
+<h2>Sales</h2>
+
+@{
+
+    if (Session["OrderList"] != null)
+    {
+        
+        List<Order> orderList = Session["OrderList"] as List<Order>;
+        double taxTotal = 0;
+        double incomeTotal = 0;
+
+        
+        foreach (Order order in orderList)
+        {
+          
+        
+            string sp = String.Format("{0, 0:C2}", order.SubPrice);
+            string mp = String.Format("{0, 0:C2}", order.MealPrice);
+
+    <table style="width:300px">
+        <tr><th>Type of Sub:</th><td>@order.Type</td></tr>
+        <tr><th>Size of Sub:</th><td>@order.Size</td></tr>
+        <tr><th>Meal Deal:</th><td>@order.MealDeal</td></tr>
+        <tr><th>Amount Ordered:</th><td>@order.Amount</td></tr>
+    </table>
+    <br />
+
+            taxTotal += order.Tax;
+            incomeTotal += order.TotalCost;
+        }
+        
+
+        string tt = String.Format("{0, 0:C2}", taxTotal);
+        string it = String.Format("{0, 0:C2}", incomeTotal);
+
+
+        <br />
+        <br />
+        
+        <h4>Daily Total</h4>
+        <table style="width:250px">
+            <tr><th>Total Tax:</th><td>@tt</td></tr>
+            <tr><th>Total Income:</th><td>@it</td></tr>
+        </table>
+       
+
+    }
+    else
+    {
+        <h4>No sales today!</h4>
+    }
+}
+

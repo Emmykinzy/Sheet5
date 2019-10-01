@@ -1,0 +1,56 @@
+﻿@using Sheet5.Models
+@model Order
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Welcome to StarSubs!</h2>
+
+<div style="width:100%;height:300px">
+    @using (Html.BeginForm())
+    {
+        <h4>Order</h4>
+        <br />
+        <div style="width:30%">
+            <div style="float:left">
+                <h4>Select a Sub Type</h4>
+                @Html.DropDownList("SubType", new SelectList(Enum.GetValues(typeof(SubType))), "Select Sub Type", new { @class = "form-control" })
+            </div>
+            <div style="float:right">
+                <h4>Select a Sub Size</h4>
+                @Html.DropDownList("SubSize", new SelectList(Enum.GetValues(typeof(SubSize))), "Select Sub Size", new { @class = "form-control" })<br />
+            </div>
+        </div>
+        <br />
+        <div style="float:left">
+            <h4>Select a meal deal</h4>
+
+
+            @Html.RadioButton("MealDeal", "None") None &nbsp;
+
+            @Html.RadioButton("MealDeal", "Drink and Chips") Drink and Chips&nbsp;
+
+            @Html.RadioButton("MealDeal", "Drink and Cookies") Drink and Cookies
+            <br /><br />
+            Order amount:
+            @Html.TextBox("Amount", null, new { @class = "textbox", type = "number", min = 0 })
+            <br /><br />
+            <input type="submit" value="Purchase" />
+        </div>
+
+    }
+
+
+</div>
+@if (ViewBag.message != null)
+{
+    <h3>@ViewBag.message</h3>
+}
+<br /><br /><br />
+@Html.ActionLink("Today's Sales", "Sales", "Home")
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
+
